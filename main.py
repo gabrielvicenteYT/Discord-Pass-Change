@@ -51,4 +51,4 @@ if __name__ == "__main__":
     print(f"[{Fore.RED}>{Fore.RESET}] Current Password")
     c_pass = str(input(" > "))
 
-    # Change().changePass(c_pass, token, interval)
+    Change().changePass(c_pass, token, interval)
