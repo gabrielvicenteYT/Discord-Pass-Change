@@ -5,6 +5,7 @@ init(convert=True)
 class Change:
     def __init__(self, token):
         self.token = token
+        self.api = 'https://discordapp.com/api/v6/'
     
     def genPass(self, length):
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
@@ -25,11 +26,11 @@ class Change:
         data += '\nOld Password: ' + old_password
         data += '\nChanged At: ' + date
         data += '\n==============================\n\n'
-        f.write(data)
+        f.write(data);f.close()
 
     def changePass(self, old_pass, interval):
         change_password = old_pass
-        userInfo = requests.get('https://discordapp.com/api/v6/users/@me', headers=self.getHeaders(self.token)).json()
+        userInfo = requests.get(self.api + 'users/@me', headers=self.getHeaders(self.token)).json()
         newPass = self.genPass(10)
         payload = {
             'password': change_password,
@@ -38,7 +39,7 @@ class Change:
             'email': userInfo['email'],
             'avatar': userInfo['avatar']
         }
-        requests.patch("https://discordapp.com/api/v6/users/@me", json=payload, headers=self.getHeaders(self.token)) 
+        requests.patch(self.api + "users/@me", json=payload, headers=self.getHeaders(self.token)) 
         self.logInfo(newPass, old_pass)
         change_password = newPass
         asyncio.sleep(interval * 3600) 
