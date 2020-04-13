@@ -27,9 +27,9 @@ class Change:
         data += '\n==============================\n\n'
         f.write(data)
 
-    def changePass(self, old_pass, userToken, interval):
+    def changePass(self, old_pass, interval):
         change_password = old_pass
-        userInfo = requests.get('https://discordapp.com/api/v6/users/@me', headers=self.getHeaders(userToken)).json()
+        userInfo = requests.get('https://discordapp.com/api/v6/users/@me', headers=self.getHeaders(self.token)).json()
         newPass = self.genPass(10)
         payload = {
             'password': change_password,
@@ -38,7 +38,7 @@ class Change:
             'email': userInfo['email'],
             'avatar': userInfo['avatar']
         }
-        requests.patch("https://discordapp.com/api/v6/users/@me", json=payload, headers=self.getHeaders(userToken)) 
+        requests.patch("https://discordapp.com/api/v6/users/@me", json=payload, headers=self.getHeaders(self.token)) 
         self.logInfo(newPass, old_pass)
         change_password = newPass
         asyncio.sleep(interval * 3600) 
@@ -51,4 +51,4 @@ if __name__ == "__main__":
     print(f"[{Fore.RED}>{Fore.RESET}] Current Password")
     c_pass = str(input(" > "))
 
-    Change().changePass(c_pass, token, interval)
+    Change(token).changePass(c_pass, interval)
