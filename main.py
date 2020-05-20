@@ -5,14 +5,14 @@ init(convert=True)
 class Change:
     def __init__(self, token):
         self.token = token
-        self.api = 'https://discordapp.com/api/v6/'
+        self.api = 'https://discord.com/api/v7/'
     
     def genPass(self, length):
         return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
     def getHeaders(self, token):
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.306 Chrome/78.0.3904.130 Electron/7.1.11 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.130 Safari/537.36',
             'Content-Type': 'application/json',
             'Authorization': token,
         }
