@@ -5,10 +5,10 @@ init(convert=True)
 class Change:
     def __init__(self, token):
         self.token = token
-        self.api = 'https://discord.com/api/v7/'
+        self.api = 'https://discord.com/api/v8/'
     
     def genPass(self, length):
-        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+        return 'put the pass that you want here'
 
     def getHeaders(self, token):
         headers = {
